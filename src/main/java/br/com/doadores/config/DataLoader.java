@@ -5,6 +5,9 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -35,12 +38,10 @@ public class DataLoader {
 				
 				JSONObject obj = (JSONObject) iterator.next();
 				
-				String data_nasc = (String) obj.get("data_nasc");
-				String[] data = data_nasc.split("/");
-				int dia = Integer.parseInt(data[0]);
-				int mes = Integer.parseInt(data[1]);
-				int ano = Integer.parseInt(data[2]);
-				Calendar calendar = new GregorianCalendar(ano, mes, dia);
+				LocalDate l = LocalDate.parse((String) obj.get("data_nasc"), 
+						DateTimeFormatter.ofPattern("dd/MM/yyyy"));				
+				
+				Calendar calendar = new GregorianCalendar(l.getYear(), l.getMonthValue(), l.getDayOfMonth());
 
 				
 				Doador d = new Doador((String)obj.get("nome"), (String)obj.get("cpf"),
@@ -56,11 +57,11 @@ public class DataLoader {
 				repository.save(d);
 			}
 			
-			List<Object[]> list = repository.idadeDoadores();
+			List<Object[]> list = repository.percentualObesosPorSexo();
 			
 			list.forEach(x -> {
 				
-				System.out.println(x[0]+"  "+x[1]);
+				System.out.println(x[0]+"    "+x[1]);
 			});
 			
 			
