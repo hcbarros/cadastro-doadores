@@ -35,8 +35,12 @@ public class DoadorService {
 		return repository.mediaIdadePorTipoSanguineo();
 	}
 	
-	public List<Object[]> doadoresPorTipoSanguineoReceptor() {
-		return repository.doadoresPorTipoSanguineoReceptor();
+	public List<Object[]> doadoresPorTipoReceptor() {
+		return repository.doadoresPorTipoReceptor();
+	}
+	
+	public List<Doador> listaDoadores() {
+		return repository.findAll();
 	}
 	
 }

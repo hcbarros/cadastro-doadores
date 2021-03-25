@@ -61,30 +61,6 @@ public class Doador {
 	   
    }
 
-	public Doador(String nome, String cpf, Calendar data_nasc, String sexo, String mae, String pai, String email,
-			String cep, String endereco, Long numero, String bairro, String cidade, String estado, String telefone_fixo,
-			String celular, Double altura, Long peso, String tipo_sanguineo) {
-		super();
-		this.nome = nome;
-		this.cpf = cpf;
-		this.data_nasc = data_nasc;
-		this.sexo = sexo;
-		this.mae = mae;
-		this.pai = pai;
-		this.email = email;
-		this.cep = cep;
-		this.endereco = endereco;
-		this.numero = numero;
-		this.bairro = bairro;
-		this.cidade = cidade;
-		this.estado = estado;
-		this.telefone_fixo = telefone_fixo;
-		this.celular = celular;
-		this.altura = altura;
-		this.peso = peso;
-		this.tipo_sanguineo = tipo_sanguineo;
-	}
-
 
 	public Long getId() {
 		return id;

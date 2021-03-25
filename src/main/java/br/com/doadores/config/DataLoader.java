@@ -7,7 +7,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -39,31 +42,35 @@ public class DataLoader {
 				JSONObject obj = (JSONObject) iterator.next();
 				
 				LocalDate l = LocalDate.parse((String) obj.get("data_nasc"), 
-						DateTimeFormatter.ofPattern("dd/MM/yyyy"));				
+						DateTimeFormatter.ofPattern("dd/MM/yyyy"));		
 				
-				Calendar calendar = new GregorianCalendar(l.getYear(), l.getMonthValue(), l.getDayOfMonth());
-
+				Calendar data_nasc = new GregorianCalendar(l.getYear(), l.getMonthValue() - 1, l.getDayOfMonth());
+								
+				Doador doador = new Doador();
+							
+				doador.setNome((String) obj.get("nome"));
+				doador.setCpf((String) obj.get("cpf"));
+				doador.setData_nasc(data_nasc);
+				doador.setSexo((String) obj.get("sexo"));
+				doador.setMae((String) obj.get("mae"));
+				doador.setPai((String) obj.get("pai"));
+				doador.setEmail((String) obj.get("email"));
+				doador.setCep((String) obj.get("cep"));
+				doador.setEndereco((String) obj.get("endereco"));
+				doador.setNumero((long) obj.get("numero"));
+				doador.setBairro((String) obj.get("bairro"));
+				doador.setCidade((String) obj.get("cidade"));
+				doador.setEstado((String) obj.get("estado"));
+				doador.setTelefone_fixo((String) obj.get("telefone_fixo"));
+				doador.setCelular((String) obj.get("celular"));
+				doador.setAltura((double) obj.get("altura"));
+				doador.setPeso((long) obj.get("peso"));
+				doador.setTipo_sanguineo((String) obj.get("tipo_sanguineo"));													
 				
-				Doador d = new Doador((String)obj.get("nome"), (String)obj.get("cpf"),
-						calendar, (String) obj.get("sexo"),
-						(String) obj.get("mae"), (String) obj.get("pai"), 
-						(String) obj.get("email"), (String) obj.get("cep"), 
-						(String) obj.get("endereco"), (long) obj.get("numero"),
-						(String) obj.get("bairro"), (String) obj.get("cidade"),
-						(String) obj.get("estado"), (String) obj.get("telefone_fixo"),
-						(String) obj.get("celular"), (double) obj.get("altura"),
-						(long) obj.get("peso"), (String) obj.get("tipo_sanguineo"));
 				
-				repository.save(d);
+				repository.save(doador);
 			}
-			
-			List<Object[]> list = repository.percentualObesosPorSexo();
-			
-			list.forEach(x -> {
-				
-				System.out.println(x[0]+"    "+x[1]);
-			});
-			
+		
 			
 			//System.out.println(System.getProperty("user.dir"));					
 		};

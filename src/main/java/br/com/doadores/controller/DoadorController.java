@@ -36,14 +36,19 @@ public class DoadorController {
 		return service.percentualObesosPorSexo();		
 	}
 	
-	@GetMapping(value = "/mediaIdadePorTipoSanguineo")
+	@GetMapping(value = "/mediaIdadePorTipo")
 	public List<Object[]> mediaIdadePorTipoSanguineo() {
 		return service.mediaIdadePorTipoSanguineo();		
 	}
 	
-	@GetMapping(value = "/doadoresPorTipoSanguineoReceptor")
-	public List<Object[]> doadoresPorTipoSanguineoReceptor() {
-		return service.doadoresPorTipoSanguineoReceptor();		
+	@GetMapping(value = "/doadoresPorTipoReceptor")
+	public List<Object[]> doadoresPorTipoReceptor() {
+		return service.doadoresPorTipoReceptor();		
+	}
+	
+	@GetMapping(value = "/listaDoadores")
+	public List<Doador> listaDoadores() {
+		return service.listaDoadores();		
 	}
 	
 }
