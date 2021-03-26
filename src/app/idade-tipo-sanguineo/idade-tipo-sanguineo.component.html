@@ -1,0 +1,36 @@
+
+<app-layout>
+
+    <div class="card">
+
+        <div class="card-body">
+            <h5 class="card-title">Média de idade por tipo sanguíneo</h5>    
+    
+            <div class="row">
+    
+              <div class="col-12">
+                <table class="table">
+    
+                  <thead>
+                      <tr>
+                          <th>Tipo sanguíneo</th>
+                          <th>Idade média</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let item of listaTipo">
+                          <th>{{item.tipo}}</th>
+                          <td>{{item.idade}}</td>
+                      </tr>
+                  </tbody>
+    
+              </table>
+              </div>
+    
+            </div>
+    
+        </div>
+    
+    </div>
+
+</app-layout>    

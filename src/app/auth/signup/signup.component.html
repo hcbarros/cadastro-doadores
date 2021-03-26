@@ -1,0 +1,35 @@
+
+
+
+
+
+<div class="block-signup">
+    <img class="img-sangue" src="../../../assets/doe-sangue.jpg" />
+
+    <div class="block-form-signup">
+    
+        <form class="form-signup">
+
+            <a class="cadastrar">Cadastrar usuário</a>
+            <p><a>ou</a><a href="" routerLink = "/" >Fazer login</a></p>
+
+            <div class="form-group">
+                <label>Nome do usuário</label>
+                <input type="text" maxlength="100" minlength="6" class="form-control" name="name" 
+                required value="" [(ngModel)]="username" placeholder="Ex: Henrique Caetano">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" maxlength="100" minlength="6" class="form-control" name="password" 
+                required value="" [(ngModel)]="password"  placeholder="Senha">
+            </div>      
+            <button class="btn-signup btn btn-success" (click)="cadastrar()" >Cadastrar</button>
+            <button type="reset" class="btn-clear btn btn-success">Limpar</button>
+
+        </form>    
+        
+    </div>
+
+</div>
+
+
