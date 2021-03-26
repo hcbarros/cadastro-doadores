@@ -5,13 +5,13 @@ doadores de sangue com algumas propriedades. O projeto Angular se encontra na br
 
 ### baseURL: http://localhost:8080/doadores
 
-GET/ candidatosPorEstado
-GET/ imcMedioPorFaixaEtaria
-GET/ percentualObesosPorSexo
-GET/ mediaIdadePorTipo
-GET/ doadoresPorTipoReceptor
-POST/ auth/signin
-POST/ auth/signup
+GET/ candidatosPorEstado \
+GET/ imcMedioPorFaixaEtaria \
+GET/ percentualObesosPorSexo \
+GET/ mediaIdadePorTipo \
+GET/ doadoresPorTipoReceptor \
+POST/ auth/signin \
+POST/ auth/signup \
 
 O servico do Spring boot tambem se encontra no seguinte endereco:
 
