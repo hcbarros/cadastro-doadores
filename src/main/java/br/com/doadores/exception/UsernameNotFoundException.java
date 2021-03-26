@@ -4,7 +4,7 @@ public class UsernameNotFoundException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 
-	public UsernameNotFoundException() {
-		super("Usuário não encontrado!");
+	public UsernameNotFoundException(String text) {
+		super(text);
 	}
 }

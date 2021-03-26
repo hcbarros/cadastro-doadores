@@ -16,6 +16,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+
 import br.com.doadores.model.ERole;
 import br.com.doadores.model.Role;
 import br.com.doadores.model.User;
@@ -56,7 +59,7 @@ public class AuthService {
 		Set<Role> roles = new HashSet<>();
 		
 		if(strRoles == null) {
-			Role userRole = roleRepository.findByName(ERole.ROLE_USER)
+			Role userRole = roleRepository.findByName(ERole.USER)
 					.orElseThrow(() -> new EntityNotFoundException (
 							"Role nao encontrada!"));
 			roles.add(userRole);
@@ -64,15 +67,15 @@ public class AuthService {
 			
 			strRoles.forEach(role -> {
 				switch (role) {
-				case "admin":
-					Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
+				case "ADMIN":
+					Role adminRole = roleRepository.findByName(ERole.ADMIN)
 					.orElseThrow(() -> new EntityNotFoundException (
 							"Role nao encontrada!"));
 					roles.add(adminRole);
 					break;
 					
 				default:
-					Role userRole = roleRepository.findByName(ERole.ROLE_USER)
+					Role userRole = roleRepository.findByName(ERole.USER)
 					.orElseThrow(() -> new EntityNotFoundException (
 							"Role nao encontrada!"));
 					roles.add(userRole);
@@ -86,17 +89,17 @@ public class AuthService {
 	}
 	
 	
-	public JwtResponse authenticateUser(String username, String password) {
+	public JwtResponse authenticateUser(String username, String password) {		
 		
 		Authentication authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(username, password));
-	
+		
 		SecurityContextHolder.getContext().setAuthentication(authentication);
-		String jwt = jwtUtils.generateJwtToken(authentication);
+		String jwt = jwtUtils.generateJwtToken(authentication);		
 		
 		UserDetailsImpl userDetails = (UserDetailsImpl) 
-				authentication.getPrincipal();
-	
+				authentication.getPrincipal();		
+		
 		List<String> roles = userDetails.getAuthorities().stream()
 										.map(item -> item.getAuthority())
 										.collect(Collectors.toList());

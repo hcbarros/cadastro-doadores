@@ -39,8 +39,4 @@ public class DoadorService {
 		return repository.doadoresPorTipoReceptor();
 	}
 	
-	public List<Doador> listaDoadores() {
-		return repository.findAll();
-	}
-	
 }

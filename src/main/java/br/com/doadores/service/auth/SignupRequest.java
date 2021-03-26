@@ -7,12 +7,14 @@ import javax.validation.constraints.Size;
 
 public class SignupRequest {
 	
-	@NotBlank
-	@Size(min = 3, max = 20)
+	@NotBlank(message = "O nome de usuário deve possuir algum valor!")
+	@Size(min = 6, max = 100, 
+	message = "O nome de usuário deve possuir no mínimo 3 e no máximo 100 caracteres!")
 	private String username;
 	
-	@NotBlank
-	@Size(min = 6, max = 40)
+	@NotBlank(message = "O senha do usuário deve possuir algum valor!")
+	@Size(min = 6, max = 100,
+	message = "A senha deve possuir no mínimo 6 e no máximo 100 caracteres!")
 	private String password;
 
 	private Set<String> roles;

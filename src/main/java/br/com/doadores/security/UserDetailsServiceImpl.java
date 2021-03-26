@@ -27,6 +27,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 					new UsernameNotFoundException("Usuário não encontrado!"));
 				
 		return UserDetailsImpl.build(user);
+		
 	}
 
 }

@@ -4,10 +4,10 @@ import javax.validation.constraints.NotBlank;
 
 public class LoginRequest {
 
-	@NotBlank
+	@NotBlank(message = "O nome de usuário deve possuir algum valor!")
 	private String username;
 	
-	@NotBlank
+	@NotBlank(message = "A senha do usuário deve possuir algum valor!")
 	private String password;
 	
 	public LoginRequest() {

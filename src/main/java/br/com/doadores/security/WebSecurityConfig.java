@@ -19,7 +19,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(securedEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
@@ -28,21 +28,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private AuthEntryPointJwt unauthorizedHandler;
 	
+	
+	
 	@Bean
 	public AuthTokenFilter authenticationJwtTokenFilter() {
 		return new AuthTokenFilter();
 	}
 	
-	@Override
-	protected void configure(
-			AuthenticationManagerBuilder authenticationManagerBuilder)
-					throws Exception {
-		
-		authenticationManagerBuilder
-			.userDetailsService(userDetailsService)
-			.passwordEncoder(passwordEncoder());
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
 	}
-	
+
 	@Bean
 	@Override
 	public AuthenticationManager authenticationManagerBean() 
@@ -50,15 +47,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		return super.authenticationManagerBean();
 	}
 	
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
+	
+	@Override
+	protected void configure(
+			AuthenticationManagerBuilder authenticationManagerBuilder)
+					throws Exception {
+				
+		authenticationManagerBuilder
+			.userDetailsService(userDetailsService)
+			.passwordEncoder(passwordEncoder());
 	}
+	
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable()
-			.cors().disable() //  permite qualquer origem (api publica)
+		
+		http.cors().and()
+			.csrf().disable()
+			
 			.exceptionHandling()
 				.authenticationEntryPoint(unauthorizedHandler)
 			.and()
@@ -66,16 +72,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 			.and()
 				.authorizeRequests()
-				.antMatchers("/doadores/auth/**")
+				.antMatchers(HttpMethod.POST, "/doadores/auth/**")
 					.permitAll()
-			.antMatchers(HttpMethod.POST, "/doadores/**")
-				.hasRole("*")
-			.antMatchers(HttpMethod.GET, "/doadores/listaDoadores")
-				.hasRole("ADMIN")
-			.antMatchers("/h2-console/**")
-				.permitAll()
-			.anyRequest().authenticated();
-		
+				.antMatchers(HttpMethod.GET, "/doadores/**")
+					.permitAll()
+				.antMatchers("/h2-console/**")
+					.permitAll()
+				.anyRequest().authenticated();
+			
 		http.headers().frameOptions().disable();
 		
 		http.addFilterBefore(authenticationJwtTokenFilter(),
@@ -89,13 +93,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/**")
-						.allowedOrigins("http://localhost:4200")
-						//.allowedOrigins("*")  esse aqui libera geral
+						//.allowedOrigins("http://localhost:4200")
+						.allowedOrigins("*")  
 						//.allowedMethods("PUT", "DELETE", "GET", "POST");
 						.allowedMethods("*")
 						.allowedHeaders("*");
 			}
 		};
 	}	
+	
+	
 	
 }

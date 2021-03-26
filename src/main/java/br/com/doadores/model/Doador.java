@@ -24,6 +24,8 @@ public class Doador {
 
    private String cpf;
    
+   private String rg;
+   
    @Temporal(TemporalType.DATE)
    private Calendar data_nasc;
    
@@ -57,6 +59,7 @@ public class Doador {
    
    private String tipo_sanguineo;
    
+   
    public Doador() {
 	   
    }
@@ -89,6 +92,16 @@ public class Doador {
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
+	}
+	
+	
+	public String getRg() {
+		return rg;
+	}
+
+
+	public void setRg(String rg) {
+		this.rg = rg;
 	}
 
 

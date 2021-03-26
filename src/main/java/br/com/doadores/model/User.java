@@ -14,6 +14,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
 @Entity
 @Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "username")})
 public class User {
@@ -22,12 +23,12 @@ public class User {
 	@GeneratedValue
 	private Long id;
 
-	@NotBlank
-	@Size(max = 20)
+	@NotBlank(message = "O nome de usuário deve possuir algum valor!")
+	@Size(max = 100, message = "O nome deve possuir no máximo 100 caracteres!")
 	private String username;
 	
-	@NotBlank
-	@Size(max = 120)
+	@NotBlank(message = "A senha do usuário deve possuir algum valor!")
+	@Size(max = 100, message = "A senha deve possuir no máximo 100 caracteres!")
 	private String password;
 	
 	@ManyToMany(fetch = FetchType.LAZY)
