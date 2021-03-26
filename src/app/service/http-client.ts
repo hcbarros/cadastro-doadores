@@ -6,7 +6,7 @@ export class Http {
 
   static httpClient() {    
     return axios.create({
-      baseURL: "http://localhost:8080/doadores"
+      baseURL: "https://spring-doadores.herokuapp.com/doadores"
     });
   }
 
