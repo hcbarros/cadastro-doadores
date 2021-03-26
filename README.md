@@ -11,7 +11,7 @@ GET/ percentualObesosPorSexo \
 GET/ mediaIdadePorTipo \
 GET/ doadoresPorTipoReceptor \
 POST/ auth/signin \
-POST/ auth/signup \
+POST/ auth/signup 
 
 O servico do Spring boot tambem se encontra no seguinte endereco:
 
