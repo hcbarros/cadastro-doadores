@@ -7,7 +7,7 @@ import axios from 'axios';
 })
 export class BuscasService {
 
-  request = Http.httpClient();
+  request = null;
   
 
   constructor(){ 
@@ -17,7 +17,7 @@ export class BuscasService {
       if (typeof user === 'string') {
         obj = JSON.parse(user);
       }
-      this.request.defaults.headers.common["Authorization"] = `Bearer ${obj.token}`
+      this.request = Http.httpClient(obj.token);
 
   }
 
